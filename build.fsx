@@ -3,6 +3,8 @@
 open Fake
 
 let buildDir = "./bin/"
+let sourceFiles = ["./src/app.fs"]
+let outputFile = "app.exe"
 
 Target "clean" (fun _ -> 
     CleanDirs [buildDir]
@@ -10,7 +12,9 @@ Target "clean" (fun _ ->
 
 Target "default" (fun _ ->
     CreateDir buildDir
-    trace "build"
+    sourceFiles
+    |> FscHelper.Fsc (fun p ->
+        { p with Output = buildDir + outputFile })
 )
 
 "clean"
