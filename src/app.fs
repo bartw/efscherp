@@ -1,7 +1,8 @@
-open System
+open Suave
+open Suave.Filters
+open Suave.Operators
+open Suave.Successful
 
-[<EntryPoint>]
-let main argv = 
-    printfn "Hello World" 
-    Console.ReadLine() |> ignore
-    0
+let routes = choose [ path "/" >=> (OK "Home") ]
+
+startWebServer defaultConfig routes

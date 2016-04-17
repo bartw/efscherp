@@ -15,7 +15,7 @@ if not exist paket.lock (
     .paket\paket.exe install
 ) else (
     @echo "Restoring dependencies"
-    .paket\paket.exe restore
+    .paket\paket.exe update
 )
 
 @echo "Build app"
