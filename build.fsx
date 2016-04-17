@@ -13,8 +13,8 @@ Target "clean" (fun _ ->
 Target "default" (fun _ ->
     CreateDir buildDir
     sourceFiles
-    |> FscHelper.Fsc (fun p ->
-        { p with Output = buildDir + outputFile })
+    |> FscHelper.Compile [ FscHelper.FscParam.Out "./bin/app.exe"
+                           FscHelper.FscParam.Target FscHelper.TargetType.Exe]
 )
 
 "clean"
