@@ -9,18 +9,17 @@ let outputPath = buildDir + outputFile
 let referencesToCopy = [ "./packages/FSharp.Core/lib/net40/FSharp.Core.dll" 
                          "./packages/Suave/lib/net40/Suave.dll"
                          "./packages/SQLProvider/lib/FSharp.Data.SqlProvider.dll"
-                         "./packages/Npgsql/lib/net45/Npgsql.dll" ]
-let references = [ "./packages/FSharp.Core/lib/net40/FSharp.Core.dll" 
-                   "./packages/Suave/lib/net40/Suave.dll"
-                   "./packages/SQLProvider/lib/FSharp.Data.SqlProvider.dll"
-                   "./packages/Npgsql/lib/net45/Npgsql.dll"
-                   "System"
-                   "System.Core" ]
+                         "./packages/Npgsql/lib/net45/Npgsql.dll"
+                         "./packages/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll" ]
+let references = [ "System"
+                   "System.Core"
+                   "System.Data" ]
+let allReferences = references @ referencesToCopy                   
 let fscParameters = [ FscHelper.FscParam.Out outputPath
                       FscHelper.FscParam.Target FscHelper.TargetType.Exe
                       FscHelper.FscParam.NoFramework ]          
 let fscParametersWithReferences = fscParameters @ 
-                                  List.map (fun reference -> FscHelper.FscParam.Reference reference) references                           
+                                  List.map (fun reference -> FscHelper.FscParam.Reference reference) allReferences                          
 
 Target "clean" (fun _ -> 
     CleanDirs [buildDir]

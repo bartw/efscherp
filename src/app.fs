@@ -1,9 +1,11 @@
 open Suave
 open Suave.Filters
+open Suave.Json
 open Suave.Operators
 open Suave.Successful
 open System
 open FSharp.Data.Sql
+open Newtonsoft.Json
 
 let [<Literal>] connStr = @"Server=127.0.0.1;Database=cleverclass;User Id=suave;Password=1234;"
 let [<Literal>] dbVendor = Common.DatabaseProviderTypes.POSTGRESQL
@@ -25,6 +27,8 @@ let getClassGroups (ctx : DbContext) : ClassGroup list =
     ctx.Public.Classgroups |> Seq.toList
 
 let routes = choose [ path "/" >=> (OK "Home") 
-                      path "/classgroups" >=> (OK "classgroups")]
+                      path "/classgroups" >=> (OK (JsonConvert.SerializeObject(getContext() 
+                                                                               |> getClassGroups 
+                                                                               |> List.map (fun cg -> cg.Name))))]
 
 startWebServer defaultConfig routes

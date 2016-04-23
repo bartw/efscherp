@@ -6,3 +6,4 @@ nuget SQLProvider
 nuget Npgsql
 nuget Suave 1.0.0
 nuget Suave.Experimental 1.0.0
+nuget Newtonsoft.Json
