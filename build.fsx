@@ -3,8 +3,9 @@
 open Fake
 
 let buildDir = "./bin/"
-let sourceFiles = ["./src/app.fs"]
-let outputFile = "app.exe"
+let sourceFiles = [ "./src/Db.fs"
+                    "./src/App.fs" ]
+let outputFile = "Breed.exe"
 let outputPath = buildDir + outputFile
 let referencesToCopy = [ "./packages/FSharp.Core/lib/net40/FSharp.Core.dll" 
                          "./packages/Suave/lib/net40/Suave.dll"
