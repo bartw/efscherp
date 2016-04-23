@@ -5,7 +5,7 @@ open FSharp.Data.Sql
 
 let [<Literal>] connStr = @"Server=127.0.0.1;Database=cleverclass;User Id=suave;Password=1234;"
 let [<Literal>] dbVendor = Common.DatabaseProviderTypes.POSTGRESQL
-let [<Literal>] resolutionFolder = @"C:\Users\bartw\Documents\projects\efscherp\packages\Npgsql\lib\net45"
+let [<Literal>] resolutionFolder = @".\packages\Npgsql\lib\net45"
 let [<Literal>] useOptTypes  = true
 
 type Sql = 
