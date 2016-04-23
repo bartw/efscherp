@@ -6,7 +6,7 @@ let buildDir = "./bin/"
 let sourceFiles = [ "./src/Db.fs"
                     "./src/Domain.fs"
                     "./src/App.fs" ]
-let outputFile = "Breed.exe"
+let outputFile = "CleverClass.exe"
 let outputPath = buildDir + outputFile
 let referencesToCopy = [ "./packages/FSharp.Core/lib/net40/FSharp.Core.dll" 
                          "./packages/Suave/lib/net40/Suave.dll"

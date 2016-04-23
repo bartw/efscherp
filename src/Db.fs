@@ -1,4 +1,4 @@
-module Breed.Db
+module CleverClass.Db
 
 open System
 open FSharp.Data.Sql
@@ -17,16 +17,20 @@ type Sql =
 type DbContext = Sql.dataContext
 type ClassGroup = DbContext.``public.classgroupsEntity``
 
-let getContext() = Sql.GetDataContext()
+let getContext () = Sql.GetDataContext()
 
-let getClassGroups (ctx : DbContext) : ClassGroup list = 
+let getClassGroups () : ClassGroup list =
+    let ctx = getContext () 
     ctx.Public.Classgroups |> Seq.toList
     
-let createClassGroup (name) (ctx : DbContext) =
-    let cg = ctx.Public.Classgroups.Create()
-    cg.Name <- name
+let createClassGroup name =
+    let ctx = getContext ()
+    let createdClassGroup = ctx.Public.Classgroups.Create()
+    createdClassGroup.Name <- name
     ctx.SubmitUpdates()
+    createdClassGroup
 
-let updateClassGroup (classGroup : ClassGroup) (name) (ctx : DbContext) =
+let updateClassGroup (classGroup : ClassGroup) (name) =
+    let ctx = getContext ()
     classGroup.Name <- name
     ctx.SubmitUpdates()

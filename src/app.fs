@@ -1,4 +1,4 @@
-module Breed.App
+module CleverClass.App
 
 open Suave
 open Suave.Filters
@@ -19,11 +19,17 @@ let jsonWebPart obj = JsonConvert.SerializeObject(obj, jsonSerializerSettings)
 let getClassGroups = warbler ( fun _ -> Domain.getClassGroups ()
                                         |> jsonWebPart)
 
+let fromJson<'a> json = JsonConvert.DeserializeObject(json, typeof<'a>) :?> 'a                   
+                                        
+let getResourceFromRequest<'a> (request : HttpRequest) = 
+        let getString rawForm = System.Text.Encoding.UTF8.GetString(rawForm)
+        request.rawForm |> getString |> fromJson<'a>                                        
+
 let routes = 
     choose 
         [ GET >=> choose 
             [ path "/classgroups" >=> getClassGroups ]
           POST >=> choose 
-            [ path ".classgoups" >=> OK "post classgroups" ] ]
+            [ path "/classgroups" >=> request (getResourceFromRequest >> Domain.createClassGroup >> jsonWebPart) ] ]
 
 startWebServer defaultConfig routes
