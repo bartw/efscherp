@@ -4,6 +4,7 @@ open Fake
 
 let buildDir = "./bin/"
 let sourceFiles = [ "./src/Db.fs"
+                    "./src/Domain.fs"
                     "./src/App.fs" ]
 let outputFile = "Breed.exe"
 let outputPath = buildDir + outputFile

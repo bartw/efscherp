@@ -21,3 +21,12 @@ let getContext() = Sql.GetDataContext()
 
 let getClassGroups (ctx : DbContext) : ClassGroup list = 
     ctx.Public.Classgroups |> Seq.toList
+    
+let createClassGroup (name) (ctx : DbContext) =
+    let cg = ctx.Public.Classgroups.Create()
+    cg.Name <- name
+    ctx.SubmitUpdates()
+
+let updateClassGroup (classGroup : ClassGroup) (name) (ctx : DbContext) =
+    classGroup.Name <- name
+    ctx.SubmitUpdates()
